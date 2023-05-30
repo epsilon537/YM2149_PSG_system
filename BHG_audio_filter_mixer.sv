@@ -116,7 +116,7 @@ always_ff @(posedge clk) begin
 // ************************************************
 // ***** Channel A-F multiply gain
 // ************************************************
-        if (seq>=0 && seq<=5) begin m_audio_in <= sound_in[seq] ; m_audio_gain <= volume[seq] ; end
+        if (/*seq>=0 &&*/ seq<=5) begin m_audio_in <= sound_in[seq] ; m_audio_gain <= volume[seq] ; end
         
 // ************************************************
 // ***** Channel A-F add/sum together.

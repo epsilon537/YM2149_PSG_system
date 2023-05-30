@@ -1,5 +1,7 @@
- `define USE_STEREO      // ********** ENABLE this line to turn one stereo output
- `define USE_DUAL_PSG    // ********** ENABLE this line to use 2 x YM2149 PSGs. IE: 6 sound channels
+// BoxLambda: These two defines are controlled by the Bender.yml manifest in boxlambda/gw/components/ym2149
+//`define USE_STEREO      // ********** ENABLE this line to turn one stereo output
+//`define USE_DUAL_PSG    // ********** ENABLE this line to use 2 x YM2149 PSGs. IE: 6 sound channels
+//`define USE_I2S         // ********** ENABLE this line to include the I2S transmitter in the design
 
 // ********************************************************************************************************************************
 // YM2149_PSG_system Programmable Sound Generator based on Jose Tejada's GitHub repository https://github.com/jotego/jt49.
@@ -204,12 +206,12 @@ module YM2149_PSG_system #(
     BHG_audio_filter_mixer #(
 
         .IN_BITS    ( YM2149_DAC_BITS   ),                                     // Number of bits for all input channels, A,B,C,D,E,F.
-        .IN_REP     ( '{0,0,0,0,0,0}    ),                                     // Each channel input representation. 0=Unsigned binary, 1=signed binary.
-        .OUT_BITS   ( MIXER_DAC_BITS    ),                                     // Output bits.  12 is plenty, but you can use 16.
+        //.IN_REP     ( '{0,0,0,0,0,0}    ),                                     // Each channel input representation. 0=Unsigned binary, 1=signed binary.
+        .OUT_BITS   ( MIXER_DAC_BITS    )                                     // Output bits.  12 is plenty, but you can use 16.
 
          // Control Register Reset defaults.
          // Address =      0    1    2    3    4    5    6         7         8    9 
-        .RST_REGS   ( '{  64,  64,  64,  64,  64,  64, 128,  8'b00000000 ,  25, 128 } )
+        //.RST_REGS   ( '{  64,  64,  64,  64,  64,  64, 128,  8'b00000000 ,  25, 128 } )
                      // VolA,VolB,VolC,VolD,VolE,VolF,mvol, INV{xxFEDCBA},bass,treb 
 
     ) FMIX_LEFT (   // Use 2 modules for stereo out
@@ -234,12 +236,12 @@ module YM2149_PSG_system #(
     BHG_audio_filter_mixer #(
 
         .IN_BITS    ( YM2149_DAC_BITS   ),                                     // Number of bits for all input channels, A,B,C,D,E,F.
-        .IN_REP     ( '{0,0,0,0,0,0}    ),                                     // Each channel input representation. 0=Unsigned binary, 1=signed binary.
-        .OUT_BITS   ( MIXER_DAC_BITS    ),                                     // Output bits.  12 is plenty, but you can use 16.
+        //.IN_REP     ( '{0,0,0,0,0,0}    ),                                     // Each channel input representation. 0=Unsigned binary, 1=signed binary.
+        .OUT_BITS   ( MIXER_DAC_BITS    )                                     // Output bits.  12 is plenty, but you can use 16.
 
          // Control Register Reset defaults.
          // Address =      0    1    2    3    4    5    6         7         8    9 
-        .RST_REGS   ( '{  64,  64,  64,  64,  64,  64, 128,  8'b00000000 ,  25, 128 } )
+        //.RST_REGS   ( '{  64,  64,  64,  64,  64,  64, 128,  8'b00000000 ,  25, 128 } )
                      // VolA,VolB,VolC,VolD,VolE,VolF,mvol, INV{xxFEDCBA},bass,treb 
 
     ) FMIX_RIGHT (   // Right channel
@@ -264,6 +266,7 @@ module YM2149_PSG_system #(
     assign   rr_fmix_r   = 8'd0 ;
 `endif
 
+`ifdef USE_I2S
     // *******************************************************************************
     // Instantiate I2S transmitter for HDMI / DAC
     // *******************************************************************************
@@ -302,5 +305,10 @@ module YM2149_PSG_system #(
         .I2S_DATA       ( i2s_data    )  // Serial data output    
 
     );
+`else
+    assign i2s_sclk = 0;
+    assign i2s_lrclk = 0;
+    assign i2s_data = 0;
+`endif //USE_I2S
 
 endmodule

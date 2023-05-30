@@ -55,7 +55,7 @@ end
 endgenerate
 
 `include "BHG_jt49_exp_lut.vh"
-localparam logic [15:0] dlut[0:31] = dlut_sel[DAC_BITS];
+logic [15:0] dlut[0:31] = dlut_sel[DAC_BITS];
 
 generate
 initial begin
