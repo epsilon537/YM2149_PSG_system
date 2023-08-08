@@ -14,20 +14,22 @@
 // ***************************************************
 // New included source code:
 // ***************************************************
+// BoxLambda: Commented out these includes and moved them to Bender.yml
+// BoxLambda's build system dependency checking doesn't work well with verilog includes.
 //
-`include "BHG_FP_clk_divider.v"       // -> Precision floating point clock divider to generate any desired system clock down to the Hz.
-`ifdef USE_I2S
-`include "I2S_transmitter.sv"         // -> I2S digital audio transmitter for all Audio DACs/Codecs and HDMI transmitters.
-`endif
-`include "BHG_audio_filter_mixer.sv"  // -> Offers a programmable channel mixing levels, DC filter with clamp, and treble/bass/master volume controls.
+// `include "BHG_FP_clk_divider.v"       // -> Precision floating point clock divider to generate any desired system clock down to the Hz.
+// `ifdef USE_I2S
+// `include "I2S_transmitter.sv"         // -> I2S digital audio transmitter for all Audio DACs/Codecs and HDMI transmitters.
+// `endif
+// `include "BHG_audio_filter_mixer.sv"  // -> Offers a programmable channel mixing levels, DC filter with clamp, and treble/bass/master volume controls.
 
-`include "BHG_jt49.v"                 // -> An enhanced modified version of the original jt49.v offering higher # of bits for the sound output channels.
-`include "BHG_jt49_exp.v"             // -> A replacement for the original jt49_exp.v using the tables in BHG_jt49_exp_lut.vh.
+// `include "BHG_jt49.v"                 // -> An enhanced modified version of the original jt49.v offering higher # of bits for the sound output channels.
+// `include "BHG_jt49_exp.v"             // -> A replacement for the original jt49_exp.v using the tables in BHG_jt49_exp_lut.vh.
 
-`include "jt49_hdl/jt49_cen.v"        // Legacy core HDL from Jose Tejada's GitHub repository https://github.com/jotego/jt49.
-`include "jt49_hdl/jt49_div.v"  
-`include "jt49_hdl/jt49_noise.v"
-`include "jt49_hdl/jt49_eg.v"   
+// `include "jt49_hdl/jt49_cen.v"        // Legacy core HDL from Jose Tejada's GitHub repository https://github.com/jotego/jt49.
+// `include "jt49_hdl/jt49_div.v"  
+// `include "jt49_hdl/jt49_noise.v"
+// `include "jt49_hdl/jt49_eg.v"   
 //
 // 
 // Enhancements include:
@@ -116,6 +118,7 @@ module YM2149_PSG_system #(
 
     );
 
+`ifdef USE_I2S
     // *******************************************************************************
     // Instantiate second fp_div for I2S transmitter
     // *******************************************************************************
@@ -133,6 +136,7 @@ module YM2149_PSG_system #(
         .clk_p180      (               )   // Strobe pulse at the fall of 'clk_out'.
 
     );
+`endif
 
     // *******************************************************************************
     // Instantiate PSGs

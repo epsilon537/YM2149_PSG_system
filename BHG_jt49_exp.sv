@@ -45,7 +45,7 @@ $display("  XXXXXX                                              XXXXXX");
 $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 $display("  XXXXXX                                                             XXXXXX");
-$display("  XXXXXX   BHG_jt49_exp parameter .DAC_BITS(%d) is not supported.    XXXXXX",6'(DAC_BITS));
+$display("  XXXXXX   BHG_jt49_exp parameter .DAC_BITS(%d) is not supported.    XXXXXX",DAC_BITS);
 $display("  XXXXXX   Only numbers from 8 thru 12 are allowed.                  XXXXXX");
 $display("  XXXXXX                                                             XXXXXX");
 $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -62,19 +62,19 @@ generate
 initial begin
 $display("");
 $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-$display("  XXX  BrianHG's BHG_jt49_exp.v is using %d bit DAC LUT table.  XXX",6'(DAC_BITS));
+$display("  XXX  BrianHG's BHG_jt49_exp.v is using %d bit DAC LUT table.  XXX",DAC_BITS);
 $display("  XXX  https://github.com/BrianHGinc                            XXX");
 $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-$display("  XXX  dlut[0:31] = '{%d,%d,%d,%d,%d,%d,%d,%d,   XXX", 9'(dlut[ 0]),12'(dlut[ 1]),12'(dlut[ 2]),12'(dlut[ 3]),12'(dlut[ 4]),12'(dlut[ 5]),12'(dlut[ 6]),12'(dlut[ 7]));
-$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d,   XXX" ,12'(dlut[ 8]),12'(dlut[ 9]),12'(dlut[10]),12'(dlut[11]),12'(dlut[12]),12'(dlut[13]),12'(dlut[14]),12'(dlut[15]));
-$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d,   XXX" ,12'(dlut[16]),12'(dlut[17]),12'(dlut[18]),12'(dlut[19]),12'(dlut[20]),12'(dlut[21]),12'(dlut[22]),12'(dlut[23]));
-$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d}   XXX" ,12'(dlut[24]),12'(dlut[25]),12'(dlut[26]),12'(dlut[27]),12'(dlut[28]),12'(dlut[29]),12'(dlut[30]),12'(dlut[31]));
+$display("  XXX  dlut[0:31] = '{%d,%d,%d,%d,%d,%d,%d,%d,   XXX", dlut[ 0], dlut[ 1], dlut[ 2], dlut[ 3], dlut[ 4], dlut[ 5], dlut[ 6], dlut[ 7]);
+$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d,   XXX" , dlut[ 8], dlut[ 9], dlut[10], dlut[11], dlut[12], dlut[13], dlut[14], dlut[15]);
+$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d,   XXX" , dlut[16], dlut[17], dlut[18], dlut[19], dlut[20], dlut[21], dlut[22], dlut[23]);
+$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d}   XXX" , dlut[24], dlut[25], dlut[26], dlut[27], dlut[28], dlut[29], dlut[30], dlut[31]);
 $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 $display("");
 end
 endgenerate
 
 // Clock the look-up table.
-always @(posedge clk) dout <= (DAC_BITS)'( dlut[din] );
+always @(posedge clk) dout <= dlut[din];
 
 endmodule

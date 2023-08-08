@@ -67,8 +67,8 @@ $display("  XXXXX   BHG_FP_clk_divider.v can only generate an output clock at le
 $display("  XXXXX                                                                                                        XXXXX");
 $display("  XXXXX   Your current set parameters:                                                                         XXXXX");
 $display("  XXXXX                                                                                                        XXXXX");
-$display("  XXXXX     .INPUT_CLK_HZ  = %d Hz.                                                                   XXXXX",31'(INPUT_CLK_HZ));
-$display("  XXXXX     .OUTPUT_CLK_HZ = %d Hz.                                                                   XXXXX",31'(OUTPUT_CLK_HZ));
+$display("  XXXXX     .INPUT_CLK_HZ  = %d Hz.                                                                   XXXXX", INPUT_CLK_HZ);
+$display("  XXXXX     .OUTPUT_CLK_HZ = %d Hz.                                                                   XXXXX", OUTPUT_CLK_HZ);
 $display("  XXXXX                                                                                                        XXXXX");
 $display("  XXXXX   .OUTPUT_CLK_HZ must be less than or equal to .INPUT_CLK_HZ/2 for BHG_FP_clk_divider.v to function.   XXXXX");
 $display("  XXXXX                                                                                                        XXXXX");
@@ -135,24 +135,29 @@ endgenerate
 localparam pmb = $clog2(clk_per_int);
 localparam mb  = (pmb<2) ? 2 : pmb  ; // Protection for when the integer divider has less than 2 bits.
 
-reg [mb-1:0] clk_cnt_m = (mb)'(0) ; // This integer counts up 1 by 1 requiring manual bit reduction 'mb' for minimum logic cells.
+reg [mb-1:0] clk_cnt_m; // This integer counts up 1 by 1 requiring manual bit reduction 'mb' for minimum logic cells.
 reg [16:0]   clk_cnt_n = 17'd0    ; // This fractional int adds upward by a fixed parameter, the FPGA compiler is capable of automatically pruning unused bits.
+
+initial begin
+    clk_cnt_m = {mb{1'b0}};
+    clk_cnt_n = 17'd0;
+end
 
 always @(posedge clk_in) begin
 
     if (rst_in) begin
-            clk_cnt_m  <= (mb)'(0) ;
-            clk_cnt_n  <= 17'd0    ;
-            clk_out    <=  1'b0    ;
-            clk_p0     <=  1'b0    ;
-            clk_p180   <=  1'b0    ;
+            clk_cnt_m  <= {mb{1'b0}};
+            clk_cnt_n  <= 17'd0     ;
+            clk_out    <=  1'b0     ;
+            clk_p0     <=  1'b0     ;
+            clk_p180   <=  1'b0     ;
     end else begin
     
         if ( clk_cnt_m == (clk_per_int[mb-1:0] - !clk_cnt_n[16]) ) begin      // Add 1 extra count to the period if the carry flag clk_cnt_n[16] is set.
 
-            clk_cnt_m  <= (mb)'(0) ;
-            clk_p0     <=  1'b1    ;
-            clk_out    <=  1'b1    ;
+            clk_cnt_m  <= {mb{1'b0}};
+            clk_p0     <=  1'b1     ;
+            clk_out    <=  1'b1     ;
             clk_cnt_n  <= clk_cnt_n[15:0] + clk_per_f ;                       // add the floating point period while clearing the carry flag clk_cnt_n[16].
 
         end else begin

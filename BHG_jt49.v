@@ -191,11 +191,11 @@ reg [DAC_BITS+1:0] acc;
 always @(posedge clk, negedge rst_n) begin
     if( !rst_n ) begin
         acc_st <= 4'b1;
-        acc    <= (DAC_BITS+2)'(0) ;
-        A      <= (DAC_BITS)'(0)   ;
-        B      <= (DAC_BITS)'(0)   ;
-        C      <= (DAC_BITS)'(0)   ;
-        sound  <= (DAC_BITS+2)'(0) ;
+        acc    <= {(DAC_BITS+2){1'b0}} ;
+        A      <= {DAC_BITS{1'b0}}   ;
+        B      <= {DAC_BITS{1'b0}}   ;
+        C      <= {DAC_BITS{1'b0}}   ;
+        sound  <= {(DAC_BITS+2){1'b0}} ;
         log    <= 5'd0;
     end else if(clk_en) begin
         acc_st <= { acc_st[2:0], acc_st[3] };
@@ -203,7 +203,7 @@ always @(posedge clk, negedge rst_n) begin
         case( acc_st )
             4'b0001: begin
                 log   <= logA;
-                acc   <= (DAC_BITS+2)'(0) ;
+                acc   <= {(DAC_BITS+2){1'b0}} ;
                 sound <= acc;
             end
             4'b0010: begin

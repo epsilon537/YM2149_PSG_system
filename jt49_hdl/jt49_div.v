@@ -30,9 +30,11 @@ module jt49_div #(parameter W=12 )(
     output reg      div
 );
 
-reg [W-1:0]count = (W)'(0);
+reg [W-1:0]count;
+initial count = {W{1'b0}};
 
-wire [W-1:0] one = { {W-1{1'b0}}, 1'b1};
+wire [W-1:0] one;
+assign one = { {W-1{1'b0}}, 1'b1};
 
 always @(posedge clk, negedge rst_n ) begin
   if( !rst_n) begin
