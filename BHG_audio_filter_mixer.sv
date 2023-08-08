@@ -37,10 +37,12 @@ input                              clk_en        ,
 input                        [3:0] c_addr        ,
 input                              c_wr          ,
 input                        [7:0] c_din         ,
-output logic                 [7:0] c_dout = 8'd0 ,
+output logic                 [7:0] c_dout        ,
 input                [IN_BITS-1:0] s_in    [0:5] ,
 output wire  signed [OUT_BITS-1:0] s_out
 );
+
+initial c_dout = 8'd0;
 
 logic         [4:0] seq         = 0 ; // This register is used to sequence the actions after every 'clk_en' pulse.
 logic signed [15:0] audio_out   = 0 ;

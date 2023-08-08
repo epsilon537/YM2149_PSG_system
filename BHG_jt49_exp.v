@@ -27,9 +27,10 @@ parameter [5:0] DAC_BITS   = 8        // The number of DAC bits for each channel
 )(
     input                     clk,
     input      [4:0]          din,
-    output reg [DAC_BITS-1:0] dout = 0
+    output reg [DAC_BITS-1:0] dout
 );
 
+initial dout = 0;
 
 generate
 if ( (DAC_BITS<8) || (DAC_BITS>12) )  initial begin

@@ -31,11 +31,17 @@ module BHG_FP_clk_divider (
 
     input        clk_in         , // System source clock.
     input        rst_in         , // Synchronous reset.
-    output reg   clk_out    = 0 , // Synthesized output clock, 50:50 duty cycle.
-    output reg   clk_p0     = 0 , // Strobe pulse at the rise of 'clk_out'.
-    output reg   clk_p180   = 0   // Strobe pulse at the fall of 'clk_out'.
+    output reg   clk_out        , // Synthesized output clock, 50:50 duty cycle.
+    output reg   clk_p0         , // Strobe pulse at the rise of 'clk_out'.
+    output reg   clk_p180         // Strobe pulse at the fall of 'clk_out'.
 
 );
+
+initial begin
+    clk_out = 0;
+    clk_p0 = 0;
+    clk_p180 = 0;
+end
 
 parameter USE_FLOATING_DIVIDE = 1         ; // 1= use floating point, 0= simple integer divide mode.
 parameter INPUT_CLK_HZ        = 100000000 ; // Source  clk_in  frequency in Hz.
