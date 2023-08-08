@@ -145,7 +145,14 @@ jt49_eg u_env(
     .env        ( envelope          )
 );
 
-reg  [4:0]          logA = 5'd0, logB = 5'd0, logC = 5'd0, log = 5'd0;
+reg  [4:0]          logA, logB, logC, log;
+initial begin
+    logA = 5'd0;
+    logB = 5'd0; 
+    logC = 5'd0; 
+    log = 5'd0;
+end
+
 wire [DAC_BITS-1:0] lin;
 
 BHG_jt49_exp #(
@@ -189,6 +196,7 @@ always @(posedge clk, negedge rst_n) begin
         B      <= (DAC_BITS)'(0)   ;
         C      <= (DAC_BITS)'(0)   ;
         sound  <= (DAC_BITS+2)'(0) ;
+        log    <= 5'd0;
     end else if(clk_en) begin
         acc_st <= { acc_st[2:0], acc_st[3] };
         acc <= acc + {2'b0,lin};

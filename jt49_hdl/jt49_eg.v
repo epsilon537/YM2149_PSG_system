@@ -45,8 +45,12 @@ wire will_hold = !CONT || HOLD;
 always @(posedge clk)
     if( cen ) env <= inv ? ~gain : gain;
 
-reg  last_step=1'b0;
-wire step_edge = (step && !last_step) || null_period;
+reg  last_step;
+initial last_step = 1'b0;
+
+wire step_edge;
+assign step_edge = (step && !last_step) || null_period;
+
 wire will_invert = (!CONT&&ATT) || (CONT&&ALT);
 reg  rst_latch=1'b0, rst_clr=1'b0;
 
@@ -61,6 +65,7 @@ always @( posedge clk, negedge rst_n )
         inv     <= 0;
         stop    <= 0;
         rst_clr <= 0;
+        last_step <= 1'b0;
     end
     else if( cen ) begin
         last_step <= step;

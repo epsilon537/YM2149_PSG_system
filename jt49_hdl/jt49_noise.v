@@ -34,17 +34,21 @@ reg [5:0]count;
 reg [16:0]poly17;
 wire poly17_zero = poly17==17'b0;
 wire noise_en;
-reg last_en = 1'b0;
+reg last_en;
+initial last_en = 1'b0;
 
-wire noise_up = noise_en && !last_en;
+wire noise_up;
+assign noise_up = noise_en && !last_en;
 
 always @(posedge clk ) if(cen) begin
     noise <= ~poly17[0];
 end
 
 always @( posedge clk, negedge rst_n )
-  if( !rst_n ) 
+  if( !rst_n ) begin
     poly17 <= 17'd0;
+    last_en <= 1'b0;
+  end
   else if( cen ) begin
     last_en <= noise_en;
     if( noise_up )
