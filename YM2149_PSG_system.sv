@@ -16,7 +16,9 @@
 // ***************************************************
 //
 `include "BHG_FP_clk_divider.v"       // -> Precision floating point clock divider to generate any desired system clock down to the Hz.
+`ifdef USE_I2S
 `include "I2S_transmitter.sv"         // -> I2S digital audio transmitter for all Audio DACs/Codecs and HDMI transmitters.
+`endif
 `include "BHG_audio_filter_mixer.sv"  // -> Offers a programmable channel mixing levels, DC filter with clamp, and treble/bass/master volume controls.
 
 `include "BHG_jt49.v"                 // -> An enhanced modified version of the original jt49.v offering higher # of bits for the sound output channels.
@@ -56,14 +58,14 @@ module YM2149_PSG_system #(
 
 )(
 
-    input                                     clk,
-    input                                     clk_i2s,
-    input                                     reset_n,
-    input                              [ 7:0] addr,      // register address
-    input                              [ 7:0] data,      // data IN to PSG
-    input                                     wr_n,      // data/addr valid
+    input wire                                clk,
+    input wire                                clk_i2s,
+    input wire                                reset_n,
+    input wire                         [ 7:0] addr,      // register address
+    input wire                         [ 7:0] data,      // data IN to PSG
+    input wire                                wr_n,      // data/addr valid
 
-    output logic                       [ 7:0] dout = 8'd0, // PSG data output
+    output logic                       [ 7:0] dout,        // PSG data output
     output wire                               i2s_sclk,    // I2S serial bit clock output
     output wire                               i2s_lrclk,   // I2S L/R output
     output wire                               i2s_data,    // I2S serial audio out
@@ -87,6 +89,8 @@ module YM2149_PSG_system #(
     // *******************************************************************************
     
     wire [7:0] rr_psg_a,rr_psg_b,rr_fmix_l,rr_fmix_r;
+
+    initial dout = 8'd0;
 
     // Select which read register to transmit back to the 'dout' port depending on the addr input.
         always_ff @(posedge clk)  dout <= (addr[7:4]==4'b1001) ? rr_fmix_r :

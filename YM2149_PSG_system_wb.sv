@@ -13,9 +13,9 @@ module YM2149_PSG_system_wb #(
 
 )(
 
-    input                                     clk,
-    input                                     clk_i2s,
-    input                                     rst,
+    input wire                                clk,
+    input wire                                clk_i2s,
+    input wire                                rst,
 
     //32-bit pipelined Wishbone interface.
     input wire [7:0]                          wb_adr,
@@ -49,7 +49,7 @@ module YM2149_PSG_system_wb #(
     assign wb_err = 1'b0;
     assign ym_sys_wr_n = ~(wb_cyc && wb_stb && wb_we);
 
-    always @(posedge clk) begin
+    always_ff @(posedge clk) begin
         do_ack <= 1'b0;
         if (wb_stb) begin
             do_ack <= 1'b1;
