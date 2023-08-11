@@ -1,3 +1,5 @@
+//A Wishbone slave port wrapper around YM2149_PSG_system.
+
 module YM2149_PSG_system_wb #(
 
     parameter      CLK_IN_HZ        = 100000000, // Input clock frequency
