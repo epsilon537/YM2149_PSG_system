@@ -1,4 +1,4 @@
-// BoxLambda: These two defines are controlled by the Bender.yml manifest in boxlambda/gw/components/ym2149
+// BoxLambda: These defines are controlled by the Bender.yml manifest in boxlambda/gw/components/ym2149
 //`define USE_STEREO      // ********** ENABLE this line to turn one stereo output
 //`define USE_DUAL_PSG    // ********** ENABLE this line to use 2 x YM2149 PSGs. IE: 6 sound channels
 //`define USE_I2S         // ********** ENABLE this line to include the I2S transmitter in the design
@@ -14,7 +14,7 @@
 // ***************************************************
 // New included source code:
 // ***************************************************
-// BoxLambda: Commented out these includes and moved them to Bender.yml
+// BoxLambda: Commented out these includes and moved them to the Bender.yml manifest in boxlambda/gw/components/ym2149
 // BoxLambda's build system dependency checking doesn't work well with verilog includes.
 //
 // `include "BHG_FP_clk_divider.v"       // -> Precision floating point clock divider to generate any desired system clock down to the Hz.
