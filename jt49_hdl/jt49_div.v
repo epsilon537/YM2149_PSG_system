@@ -23,11 +23,11 @@
 
 
 module jt49_div #(parameter W=12 )(   
-    (* direct_enable *) input cen,
-    input           clk, // this is the divided down clock from the core
-    input           rst_n,
-    input [W-1:0]  period,
-    output reg      div
+    (* direct_enable *) input wire cen,
+    input wire     clk, // this is the divided down clock from the core
+    input wire     rst_n,
+    input wire [W-1:0]  period,
+    output reg     div
 );
 
 reg [W-1:0]count;

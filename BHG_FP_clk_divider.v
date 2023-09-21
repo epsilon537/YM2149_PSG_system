@@ -29,8 +29,8 @@
 
 module BHG_FP_clk_divider (
 
-    input        clk_in         , // System source clock.
-    input        rst_in         , // Synchronous reset.
+    input  wire  clk_in         , // System source clock.
+    input  wire  rst_in         , // Synchronous reset.
     output reg   clk_out        , // Synthesized output clock, 50:50 duty cycle.
     output reg   clk_p0         , // Strobe pulse at the rise of 'clk_out'.
     output reg   clk_p180         // Strobe pulse at the fall of 'clk_out'.

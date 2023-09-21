@@ -23,10 +23,10 @@
 
 
 module jt49_noise(
-  (* direct_enable *) input cen,
-    input       clk,
-    input       rst_n,
-    input [4:0] period,
+  (* direct_enable *) input wire cen,
+    input wire  clk,
+    input wire  rst_n,
+    input wire [4:0] period,
     output reg  noise
 );
 

@@ -35,26 +35,26 @@ parameter       DAC_BITS   = 8        // The number of DAC bits for each channel
                                       // With 12 bits, the lowest volume settings will be too quiet.
 
 )( // note that input ports are not multiplexed
-    input                     rst_n,
-    input                     clk,    // signal on positive edge
-    input                     clk_en /* synthesis direct_enable = 1 */,
-    input  [3:0]              addr,
-    input                     cs_n,
-    input                     wr_n,  // write
-    input  [7:0]              din,
-    input                     sel, // if sel is low, the clock is divided by 2
+    input wire                rst_n,
+    input wire                clk,    // signal on positive edge
+    input wire                clk_en /* synthesis direct_enable = 1 */,
+    input wire [3:0]          addr,
+    input wire                cs_n,
+    input wire                wr_n,  // write
+    input wire [7:0]          din,
+    input wire                sel, // if sel is low, the clock is divided by 2
     output reg [7:0]          dout,
     output reg [DAC_BITS+1:0] sound,  // combined channel output
     output reg [DAC_BITS-1:0] A,      // linearised channel output
     output reg [DAC_BITS-1:0] B,
     output reg [DAC_BITS-1:0] C,
-    output           sample,
+    output wire               sample,
 
-    input      [7:0]          IOA_in,
-    output     [7:0]          IOA_out,
+    input wire [7:0]          IOA_in,
+    output wire [7:0]         IOA_out,
 
-    input      [7:0]          IOB_in,
-    output     [7:0]          IOB_out
+    input wire [7:0]          IOB_in,
+    output wire [7:0]         IOB_out
 );
 
 

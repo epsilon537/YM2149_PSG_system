@@ -22,12 +22,12 @@
     */
 
 module jt49_cen(
-    input       clk,
-    input       rst_n,
-    input       cen,    // base clock enable signal
-    input       sel,    // when low, divide by 2 once more
-    output  reg cen16,
-    output  reg cen256
+    input wire  clk,
+    input wire  rst_n,
+    input wire  cen,    // base clock enable signal
+    input wire  sel,    // when low, divide by 2 once more
+    output reg  cen16,
+    output reg  cen256
 );
 
 reg [9:0] cencnt;
