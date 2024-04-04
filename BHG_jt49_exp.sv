@@ -58,21 +58,21 @@ endgenerate
 `include "BHG_jt49_exp_lut.vh"
 logic [15:0] dlut[0:31] = dlut_sel[DAC_BITS];
 
-generate
-initial begin
-$display("");
-$display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-$display("  XXX  BrianHG's BHG_jt49_exp.v is using %d bit DAC LUT table.  XXX",DAC_BITS);
-$display("  XXX  https://github.com/BrianHGinc                            XXX");
-$display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-$display("  XXX  dlut[0:31] = '{%d,%d,%d,%d,%d,%d,%d,%d,   XXX", dlut[ 0], dlut[ 1], dlut[ 2], dlut[ 3], dlut[ 4], dlut[ 5], dlut[ 6], dlut[ 7]);
-$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d,   XXX" , dlut[ 8], dlut[ 9], dlut[10], dlut[11], dlut[12], dlut[13], dlut[14], dlut[15]);
-$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d,   XXX" , dlut[16], dlut[17], dlut[18], dlut[19], dlut[20], dlut[21], dlut[22], dlut[23]);
-$display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d}   XXX" , dlut[24], dlut[25], dlut[26], dlut[27], dlut[28], dlut[29], dlut[30], dlut[31]);
-$display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-$display("");
-end
-endgenerate
+// generate
+// initial begin
+// $display("");
+// $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+// $display("  XXX  BrianHG's BHG_jt49_exp.v is using %d bit DAC LUT table.  XXX",DAC_BITS);
+// $display("  XXX  https://github.com/BrianHGinc                            XXX");
+// $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+// $display("  XXX  dlut[0:31] = '{%d,%d,%d,%d,%d,%d,%d,%d,   XXX", dlut[ 0], dlut[ 1], dlut[ 2], dlut[ 3], dlut[ 4], dlut[ 5], dlut[ 6], dlut[ 7]);
+// $display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d,   XXX" , dlut[ 8], dlut[ 9], dlut[10], dlut[11], dlut[12], dlut[13], dlut[14], dlut[15]);
+// $display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d,   XXX" , dlut[16], dlut[17], dlut[18], dlut[19], dlut[20], dlut[21], dlut[22], dlut[23]);
+// $display("  XXX                %d,%d,%d,%d,%d,%d,%d,%d}   XXX" , dlut[24], dlut[25], dlut[26], dlut[27], dlut[28], dlut[29], dlut[30], dlut[31]);
+// $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+// $display("");
+// end
+// endgenerate
 
 // Clock the look-up table.
 always @(posedge clk) dout <= dlut[din];

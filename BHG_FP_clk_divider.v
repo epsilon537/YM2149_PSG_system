@@ -104,28 +104,28 @@ localparam real   f_div            = clk_per_f                                  
 // ****************************************************************************
 // Display calculated clock divider specs in the compiler's message window.
 // ****************************************************************************
-generate
-initial begin
-$display("");
-$display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-$display("  XXX   BHG_FP_clk_divider.v settings/results.   XXX");
-$display("  XXX   https://github.com/BrianHGinc            XXX");
-$display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-$display("  XXX   USE_FLOATING_DIVIDE = %0d"                                                                  ,   (USE_FLOATING_DIVIDE    ));
-$display("  XXX   Set INPUT_CLK_HZ    = %0d Hz."                                                              ,   (INPUT_CLK_HZ           ));
-$display("  XXX   Set OUTPUT_CLK_HZ   = %0d Hz."                                                              ,   (OUTPUT_CLK_HZ          ));
-$display("  XXX   --------------------------------------------- (Floats only accurate to 2 decimal places)"); //**** %0.2f works in Modelsim, not Quartus. ****
-$display("  XXX   True output freq    = %f Hz."                                                               ,   (f_tru/100              ));
-$display("  XXX   Frequency error     = %f ppm."                                                              ,   (f_ppm/100              ));
-$display("  XXX   Periodic jitter     = +/- %f ns."                                                           ,   (f_jit/100              ));
-$display("  XXX   ---------------------------------------------");
-$display("  XXX   Integer Divider     = %0d."                                                                 ,   (clk_per_int            ));
-$display("  XXX   Divider Fraction    = %0d/65536.           OutHz = InHz/(ID+(DF/65536))"                    ,   (clk_per_f              ));
-$display("  XXX   ~Divider to 6dp.    = %f."                                                                  ,   (f_div/65536+clk_per_int));
-$display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-$display("");
-end
-endgenerate
+// generate
+// initial begin
+// $display("");
+// $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+// $display("  XXX   BHG_FP_clk_divider.v settings/results.   XXX");
+// $display("  XXX   https://github.com/BrianHGinc            XXX");
+// $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+// $display("  XXX   USE_FLOATING_DIVIDE = %0d"                                                                  ,   (USE_FLOATING_DIVIDE    ));
+// $display("  XXX   Set INPUT_CLK_HZ    = %0d Hz."                                                              ,   (INPUT_CLK_HZ           ));
+// $display("  XXX   Set OUTPUT_CLK_HZ   = %0d Hz."                                                              ,   (OUTPUT_CLK_HZ          ));
+// $display("  XXX   --------------------------------------------- (Floats only accurate to 2 decimal places)"); //**** %0.2f works in Modelsim, not Quartus. ****
+// $display("  XXX   True output freq    = %f Hz."                                                               ,   (f_tru/100              ));
+// $display("  XXX   Frequency error     = %f ppm."                                                              ,   (f_ppm/100              ));
+// $display("  XXX   Periodic jitter     = +/- %f ns."                                                           ,   (f_jit/100              ));
+// $display("  XXX   ---------------------------------------------");
+// $display("  XXX   Integer Divider     = %0d."                                                                 ,   (clk_per_int            ));
+// $display("  XXX   Divider Fraction    = %0d/65536.           OutHz = InHz/(ID+(DF/65536))"                    ,   (clk_per_f              ));
+// $display("  XXX   ~Divider to 6dp.    = %f."                                                                  ,   (f_div/65536+clk_per_int));
+// $display("  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+// $display("");
+// end
+// endgenerate
 
 
 // ****************************************************************************
